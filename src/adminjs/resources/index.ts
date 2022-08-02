@@ -1,3 +1,4 @@
+import { episodeResourceOptions } from './episode';
 import { ResourceWithOptions } from "adminjs";
 
 //Configurações Resource AdminJS
@@ -5,7 +6,7 @@ import { categoryResourceOptions } from "./category";
 import { courseResourceOptions } from "./course";
 
 //Models e Relacionamentos
-import { Category, Course } from "../../models";
+import { Category, Course, Episode } from "../../models";
 
 //ARQUIVO PARA REUNIR TODOS OS RESOURCES PARA O ADMINJS GERENCIAR
 export const adminJsResources: ResourceWithOptions[] = [
@@ -16,5 +17,9 @@ export const adminJsResources: ResourceWithOptions[] = [
   {
     resource: Course,
     options: courseResourceOptions
+  },
+  {
+    resource: Episode,
+    options: episodeResourceOptions
   },
 ];
