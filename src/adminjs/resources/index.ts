@@ -1,4 +1,4 @@
-import { episodeResourceOptions } from './episode';
+import { episodeResourceOptions, episodeResourceFeatures } from './episode';
 import { ResourceWithOptions } from "adminjs";
 
 //Configurações Resource AdminJS
@@ -20,6 +20,7 @@ export const adminJsResources: ResourceWithOptions[] = [
   },
   {
     resource: Episode,
-    options: episodeResourceOptions
+    options: episodeResourceOptions,
+    features: episodeResourceFeatures
   },
 ];
