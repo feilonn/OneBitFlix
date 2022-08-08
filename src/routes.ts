@@ -10,4 +10,5 @@ router.get('/categories', categoriesController.index);
 router.get('/categories/:id', categoriesController.categoryWithCourses);
 
 //Courses Routes
+router.get('/courses/featured', coursesController.featuredCourses);
 router.get('/courses/:id', coursesController.coursesWithEpisodes);

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { couseService } from "../services/courseService";
+import { courseService } from "../services/courseService";
 
 export const coursesController = {
     //GET -> /courses/:id
@@ -7,8 +7,19 @@ export const coursesController = {
         const { id } = req.params;
 
         try {
-           const course = await couseService.show(id);
+           const course = await courseService.show(id);
            return res.json(course); 
+        } catch (error) {
+            if(error instanceof Error) {
+                res.status(400).json({ message: error.message });
+            }
+        }
+    },
+
+    featuredCourses: async(req: Request, res: Response) => {
+        try {
+            const courses = await courseService.getRandomFeaturedCourses();
+            return res.json(courses);
         } catch (error) {
             if(error instanceof Error) {
                 res.status(400).json({ message: error.message });
