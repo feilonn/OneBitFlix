@@ -11,4 +11,5 @@ router.get('/categories/:id', categoriesController.categoryWithCourses);
 
 //Courses Routes
 router.get('/courses/featured', coursesController.featuredCourses);
+router.get('/courses/newest', coursesController.newestCourses);
 router.get('/courses/:id', coursesController.coursesWithEpisodes);
