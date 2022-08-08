@@ -1,4 +1,6 @@
-import express from 'express'
+import express from 'express';
+//Controllers
+import { coursesController } from './controllers/coursesController';
 import { categoriesController } from './controllers/categoriesController';
 
 export const router = express.Router();
@@ -6,3 +8,6 @@ export const router = express.Router();
 //Categories Routes
 router.get('/categories', categoriesController.index);
 router.get('/categories/:id', categoriesController.categoryWithCourses);
+
+//Courses Routes
+router.get('/courses/:id', coursesController.coursesWithEpisodes);

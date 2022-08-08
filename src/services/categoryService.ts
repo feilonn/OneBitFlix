@@ -1,7 +1,7 @@
 import { Category } from "../models";
 
 export const categoryService = {
-  //GET -> /categories
+ 
   findAllPaginated: async (page: number, perPage: number) => {
     //Pula os primeiros 'offset' registros
     //ex: page = 2, perPage = 10 -> offset = 10 -> pula os primeiros 10 registros
@@ -22,7 +22,6 @@ export const categoryService = {
     };
   },
 
-  //GET -> /categories/:id
   show: async (id: string) => {
     const categoryWithCourses = await Category.findByPk(id, {
       attributes: ["id", "name"],
