@@ -11,7 +11,7 @@ Category.hasMany(Course, { as: 'courses' });
 Course.belongsTo(Category);
 
 //Relacionamento One to Many: Course -> Episode 
-Course.hasMany(Episode);
+Course.hasMany(Episode, { as: 'episodes' });
 Episode.belongsTo(Course);
 
 export {
