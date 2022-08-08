@@ -7,7 +7,7 @@ import { Category } from './Category'
 //E SEUS RELACIONAMENTOS
 
 //Relacionamento One to Many: Category -> Course
-Category.hasMany(Course);
+Category.hasMany(Course, { as: 'courses' });
 Course.belongsTo(Category);
 
 //Relacionamento One to Many: Course -> Episode 

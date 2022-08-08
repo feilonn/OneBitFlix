@@ -5,3 +5,4 @@ export const router = express.Router();
 
 //Categories Routes
 router.get('/categories', categoriesController.index);
+router.get('/categories/:id', categoriesController.categoryWithCourses);
