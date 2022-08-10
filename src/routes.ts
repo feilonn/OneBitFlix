@@ -17,6 +17,7 @@ export const router = express.Router();
 router.post('/auth/register', authController.register);
 router.post('/auth/login', authController.login)
 router.get('/users/current/watching', ensureAuth, usersController.watching)
+router.get('/users/current', ensureAuth, usersController.show)
 
 //Categories Routes
 router.get('/categories', ensureAuth, categoriesController.index);
