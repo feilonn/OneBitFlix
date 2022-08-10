@@ -9,12 +9,14 @@ import { favoritesController } from './controllers/favoritesController';
 //Middlewares
 import { ensureAuth, ensureAuthViaQuery } from './middlewares/auth';
 import { likesController } from './controllers/likesController';
+import { usersController } from './controllers/usersController';
 
 export const router = express.Router();
 
 //Users Routes
 router.post('/auth/register', authController.register);
 router.post('/auth/login', authController.login)
+router.get('/users/current/watching', ensureAuth, usersController.watching)
 
 //Categories Routes
 router.get('/categories', ensureAuth, categoriesController.index);
@@ -29,6 +31,8 @@ router.get('/courses/:id', ensureAuth, coursesController.coursesWithEpisodes);
 
 //Videos Routes
 router.get('/episodes/stream', ensureAuthViaQuery, episodesController.stream);
+router.get('/episodes/:id/watchTime', ensureAuth, episodesController.getWatchTime);
+router.post('/episodes/:id/watchTime', ensureAuth, episodesController.setWatchTime);
 
 //Favorites Routes
 router.post('/favorites', ensureAuth, favoritesController.save);

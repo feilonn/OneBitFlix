@@ -1,3 +1,5 @@
+//Models
+import { WatchTime } from './WatchTime';
 import { User } from './User';
 import { Episode } from './Episode';
 import { Course } from './Course';
@@ -27,11 +29,16 @@ User.hasMany(Favorite, { as: 'FavoriteCourses' , foreignKey: 'user_id' });
 Course.belongsToMany(User, { through: Like });
 User.belongsToMany(Course, { through: Like });
 
+//Relacionamento User -> Episode
+Episode.belongsToMany(User,{ through: WatchTime })
+User.belongsToMany(Episode, { through: WatchTime })
+
 export {
   Category,
   Course,
   Episode,
   User,
   Favorite,
-  Like
+  Like,
+  WatchTime
 }
