@@ -4,7 +4,7 @@ import { coursesController } from './controllers/coursesController';
 import { categoriesController } from './controllers/categoriesController';
 import { episodesController } from './controllers/episodesController';
 import { authController } from './controllers/authController';
-import { ensureAuth } from './middlewares/auth';
+import { ensureAuth, ensureAuthViaQuery } from './middlewares/auth';
 
 export const router = express.Router();
 
@@ -23,4 +23,4 @@ router.get('/courses/search', ensureAuth, coursesController.searchCourses);
 router.get('/courses/:id', ensureAuth, coursesController.coursesWithEpisodes);
 
 //Courses Videos
-router.get('/episodes/stream', episodesController.stream);
+router.get('/episodes/stream', ensureAuthViaQuery, episodesController.stream)
