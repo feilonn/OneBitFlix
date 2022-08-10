@@ -4,6 +4,9 @@ import { coursesController } from './controllers/coursesController';
 import { categoriesController } from './controllers/categoriesController';
 import { episodesController } from './controllers/episodesController';
 import { authController } from './controllers/authController';
+import { favoritesController } from './controllers/favoritesController';
+
+//Middlewares
 import { ensureAuth, ensureAuthViaQuery } from './middlewares/auth';
 
 export const router = express.Router();
@@ -22,5 +25,8 @@ router.get('/courses/newest', coursesController.newestCourses);
 router.get('/courses/search', ensureAuth, coursesController.searchCourses);
 router.get('/courses/:id', ensureAuth, coursesController.coursesWithEpisodes);
 
-//Courses Videos
+//Videos Routes
 router.get('/episodes/stream', ensureAuthViaQuery, episodesController.stream)
+
+//Favorites Routes
+router.post('/favorites', ensureAuth, favoritesController.save)
