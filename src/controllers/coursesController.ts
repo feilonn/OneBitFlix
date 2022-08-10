@@ -1,15 +1,26 @@
+import { favoriteService } from './../services/favoriteService';
 import { Request, Response } from "express";
 import { getPaginationParams } from "../helpers/paginationParams";
+import { AuthenticatedRequest } from "../middlewares/auth";
 import { courseService } from "../services/courseService";
+import { likeService } from "../services/likeService";
 
 export const coursesController = {
   //GET -> /courses/:id
-  coursesWithEpisodes: async (req: Request, res: Response) => {
-    const { id } = req.params;
+  coursesWithEpisodes: async (req: AuthenticatedRequest, res: Response) => {
+    const userId = req.user!.id;
+    const courseId = req.params.id;
 
     try {
-      const course = await courseService.show(id);
-      return res.json(course);
+      const course = await courseService.show(courseId);
+      if (!course){
+        return res.status(404).json({ message: "Curso não encontrado" });
+      }
+
+      const liked = await likeService.isLiked(userId, Number(courseId));
+      const favorited = await favoriteService.isFavorited(userId, Number(courseId));
+      return res.json({ ...course.get(), favorited, liked });
+      
     } catch (error) {
       if (error instanceof Error) {
         res.status(400).json({ message: error.message });
@@ -44,14 +55,14 @@ export const coursesController = {
   //GET -> /courses/search?='teste'
   searchCourses: async (req: Request, res: Response) => {
     const { name } = req.query;
-    const [page, perPage] = getPaginationParams(req.query)
+    const [page, perPage] = getPaginationParams(req.query);
 
     try {
-        if(typeof name !== 'string') {
-            throw new Error('O nome de pesquisa deve ser uma string');
-        }
-        const courses = await courseService.findByName(name, page, perPage);
-        res.json(courses);
+      if (typeof name !== "string") {
+        throw new Error("O nome de pesquisa deve ser uma string");
+      }
+      const courses = await courseService.findByName(name, page, perPage);
+      res.json(courses);
     } catch (error) {
       if (error instanceof Error) {
         res.status(400).json({ message: error.message });

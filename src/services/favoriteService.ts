@@ -1,43 +1,53 @@
-import { Favorite } from "../models/Favorite"
-
+import { Favorite } from "../models/Favorite";
 
 export const favoriteService = {
-	create: async (userId: number, courseId: number) => {
+  create: async (userId: number, courseId: number) => {
     const favorite = await Favorite.create({
       userId,
-      courseId
-    })
+      courseId,
+    });
 
-    return favorite
+    return favorite;
   },
 
   findByUserId: async (userId: number) => {
     const favorites = await Favorite.findAll({
-      attributes: [['user_id', 'userId']],
+      attributes: [["user_id", "userId"]],
       where: { userId },
       include: {
-        association: 'Course',
+        association: "Course",
         attributes: [
-          'id',
-          'name',
-          'synopsis',
-          ['thumbnail_url', 'thumbnailUrl']
-        ]
-      }
-    })
+          "id",
+          "name",
+          "synopsis",
+          ["thumbnail_url", "thumbnailUrl"],
+        ],
+      },
+    });
 
     return {
       userId,
-      courses: favorites.map(favorite => favorite.Course)
-    }
+      courses: favorites.map((favorite) => favorite.Course),
+    };
   },
-  
+
   delete: async (userId: number, courseId: number) => {
     await Favorite.destroy({
       where: {
         userId,
-        courseId
-      }
-    })
+        courseId,
+      },
+    });
+  },
+
+  isFavorited: async (userId: number, courseId: number) => {
+    const favorite = await Favorite.findOne({
+      where: {
+        userId,
+        courseId,
+      },
+    });
+
+    return favorite !== null;
   }
-}
+};
