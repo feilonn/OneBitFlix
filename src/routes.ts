@@ -8,6 +8,7 @@ import { favoritesController } from './controllers/favoritesController';
 
 //Middlewares
 import { ensureAuth, ensureAuthViaQuery } from './middlewares/auth';
+import { likesController } from './controllers/likesController';
 
 export const router = express.Router();
 
@@ -32,3 +33,6 @@ router.get('/episodes/stream', ensureAuthViaQuery, episodesController.stream);
 router.post('/favorites', ensureAuth, favoritesController.save);
 router.get('/favorites', ensureAuth, favoritesController.index);
 router.delete('/favorites/:id', ensureAuth, favoritesController.delete);
+
+//Likes Routes
+router.post('/likes', ensureAuth, likesController.save)
