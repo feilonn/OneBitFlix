@@ -24,6 +24,7 @@ router.get('/categories/:id', ensureAuth, categoriesController.categoryWithCours
 router.get('/courses/featured', ensureAuth, coursesController.featuredCourses);
 router.get('/courses/newest', coursesController.newestCourses);
 router.get('/courses/search', ensureAuth, coursesController.searchCourses);
+router.get('/courses/popular', ensureAuth, coursesController.popular)
 router.get('/courses/:id', ensureAuth, coursesController.coursesWithEpisodes);
 
 //Videos Routes
