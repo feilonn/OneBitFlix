@@ -15,10 +15,11 @@ export const router = express.Router();
 
 //Users Routes
 router.post('/auth/register', authController.register);
-router.post('/auth/login', authController.login)
-router.get('/users/current/watching', ensureAuth, usersController.watching)
-router.get('/users/current', ensureAuth, usersController.show)
-router.put('/users/current', ensureAuth, usersController.update)
+router.post('/auth/login', authController.login);
+router.get('/users/current/watching', ensureAuth, usersController.watching);
+router.get('/users/current', ensureAuth, usersController.show);
+router.put('/users/current', ensureAuth, usersController.update);
+router.put('/users/current/password', ensureAuth, usersController.updatePassword);
 
 //Categories Routes
 router.get('/categories', ensureAuth, categoriesController.index);
